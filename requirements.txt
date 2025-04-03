@@ -1,0 +1,10 @@
+# Core OCR packages
+pytesseract  # Python wrapper for Tesseract
+ocrmypdf     # For adding OCR layers to PDFs
+PyMuPDF      # For PDF manipulation (also known as fitz)
+PyPDF2       # For basic PDF operations
+pdf2image    # For converting PDFs to images
+Pillow       # For image processing
+
+# Optional but useful
+opencv-python
