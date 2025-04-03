@@ -5,7 +5,6 @@ from fitz import open
 Use this doc as a reference for helpful PyMuPDF functions for embedded PDFs 
 """
 
-
 FEB_ISSUE = "/Users/srwang/Documents/CPSC381/new_journal/new_journal/sample_data/02_2025.pdf"
 MAY_ISSUE = "/Users/srwang/Documents/CPSC381/new_journal/new_journal/sample_data/05_14_1968.pdf"
 
