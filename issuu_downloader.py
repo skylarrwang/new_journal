@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
 import time
 
 # Path to ChromeDriver (Update this path!)
@@ -13,7 +14,6 @@ options.add_experimental_option("prefs", {
     "download.prompt_for_download": False,
 })
 
-from selenium.webdriver.chrome.service import Service
 
 service = Service(CHROMEDRIVER_PATH)
 driver = webdriver.Chrome(service=service, options=options)
