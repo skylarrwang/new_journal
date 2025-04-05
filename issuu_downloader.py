@@ -29,7 +29,7 @@ wait.until(EC.presence_of_element_located((By.NAME, "email")))
 
 email = driver.find_element(By.NAME, "email")
 password = driver.find_element(By.NAME, "password")
-email.send_keys("thenewjournalatyale@gmail.com")
+email.send_keys("thenewjournal@gmail.com")
 password.send_keys("305crown")
 password.send_keys(Keys.RETURN)
 
