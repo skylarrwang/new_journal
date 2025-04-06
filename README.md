@@ -1,6 +1,6 @@
 # TO DO
 
-- [ ] Download texts from new_journal
+- [x] Download texts from new_journal
 - [x] OCR on embedded text example
 - [ ] OCR on non-embedded PDF (do we need?)
 - [ ] Figure out how to chunk text properly -> research vector DB
