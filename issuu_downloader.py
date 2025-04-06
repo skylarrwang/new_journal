@@ -39,39 +39,65 @@ driver.get("https://issuu.com/home/published")
 time.sleep(5)
 
 # --- LOAD ALL PUBLICATIONS ---
+
 while True:
     try:
         load_more_button = wait.until(EC.element_to_be_clickable(
             (By.XPATH, '//span[contains(text(), "Load more")]')))
         print("Clicking 'Load more'...")
-        driver.execute_script("arguments[0].scrollIntoView();", load_more_button)
-        load_more_button.click()
-        time.sleep(10)  # Wait for new content to load
-    except:
-        print("No more 'Load more' buttons or timed out.")
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", load_more_button)
+        time.sleep(1)  # Brief pause after scrolling
+        
+        # Use JavaScript click for consistency with your other code
+        driver.execute_script("arguments[0].click();", load_more_button)
+        time.sleep(5)  # Wait for new content to load
+    except Exception as e:
+        print(f"No more 'Load more' buttons or timed out: {e}")
         break
 
 time.sleep(5)
 
-# --- GET ALL PUBLICATION MENUS ---
-menu_buttons = driver.find_elements(By.XPATH, '//svg[contains(@xlink:href, "#icon-more")]/ancestor::button')
+
+menu_buttons = driver.find_elements(By.XPATH, 
+    '//div[contains(@class, "PopupBox__popup-box-container")]//button[contains(@class, "ProductButton__product-button--icon-alone") and @aria-expanded="false"]')
+
 print(f"Found {len(menu_buttons)} publication menus.")
 
 for index, menu_button in enumerate(menu_buttons):
     try:
         print(f"Opening menu for publication #{index + 1}")
-        driver.execute_script("arguments[0].scrollIntoView();", menu_button)
-        menu_button.click()
-
-        # Wait for the dropdown and click "Download Publication"
-        download_option = wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '//span[contains(text(), "Download Publication")]')))
-        download_option.click()
+        
+        # Get the button's ID before clicking it
+        button_id = menu_button.get_attribute('id')
+        print(f"Button ID: {button_id}")
+        
+        # Scroll to ensure visibility
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", menu_button)
+        time.sleep(1)
+        
+        # Click the button
+        driver.execute_script("arguments[0].click();", menu_button)
+        time.sleep(1)
+        
+        # Target the download option using the button ID prefix
+        # This ensures we're looking at the dropdown connected to the button we just clicked
+        button_prefix = button_id.split('-more-options')[0]
+        download_xpath = f"//span[@id='{button_prefix}-more-options-option-0']//span[contains(text(), 'Download Publication')]"
+        
+        download_option = wait.until(EC.element_to_be_clickable((By.XPATH, download_xpath)))
+        driver.execute_script("arguments[0].click();", download_option)
         print(f"Clicked 'Download Publication' for issue #{index + 1}")
-
-        time.sleep(10)  # Wait for download to begin
+        
+        time.sleep(8)  # Allow more time for download
+        
+        # Close any modals
+        driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.ESCAPE)
+        time.sleep(2)
+        
     except Exception as e:
         print(f"Failed to download issue #{index + 1}: {e}")
+        # Take a screenshot for debugging
+        driver.save_screenshot(f"error_{index+1}.png")
         continue
 
 print("All downloads attempted.")
