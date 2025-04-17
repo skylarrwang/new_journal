@@ -8,7 +8,7 @@ custom_prompt = "Try to identify the title of the article, the author, and the d
 # Initialize parser with Google Gemini model
 parser = VisionParser(
     model_name="gemini-2.0-flash-lite",
-    api_key="AIzaSyC04D4AKO9R8v_9fGRSkmu8dzosB2a5siQ", # Get the Gemini API key from https://aistudio.google.com/app/apikey
+    api_key="", # Get the Gemini API key from https://aistudio.google.com/app/apikey
     temperature=0.7,
     custom_prompt=custom_prompt,
     top_p=0.4,
