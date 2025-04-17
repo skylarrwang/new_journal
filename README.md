@@ -25,3 +25,16 @@ Main issues:
 - a few select pages are screwed up by images or by bad scanning
 - parsing the masthead is hard
 
+
+# Heuristics for name extraction
+- By, "-"
+- **Author**
+- Line breaks 
+
+
+
+# Prompts
+- Extract table of contents from 2nd/3rd page
+
+# Old prompt
+- 

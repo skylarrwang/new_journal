@@ -7,6 +7,7 @@ Use this doc as a reference for helpful PyMuPDF functions for embedded PDFs
 
 FEB_ISSUE = "/Users/srwang/Documents/CPSC381/new_journal/new_journal/sample_data/02_2025.pdf"
 MAY_ISSUE = "/Users/srwang/Documents/CPSC381/new_journal/new_journal/sample_data/05_14_1968.pdf"
+DECEMBER_ISSUE = "/Users/srwang/Documents/CPSC381/new_journal/new_journal/sample_data/12_06_1977.pdf"
 
 def test_ocr(file_path):
     """
@@ -18,7 +19,7 @@ def test_ocr(file_path):
 
     # Perform OCR on the embedded PDF file
     doc = open(file_path)
-    page = doc[1] # load the first page
+    page = doc[3] # load the first page
     
     ## RETURN TEXT IN A RAW FORMAT
     # str
@@ -34,7 +35,7 @@ def test_ocr(file_path):
     print("========================")
     print("Structured text:")
     print("========================")
-    #print(structured_text)
+    # print(structured_text)
     
     
     ## RETURN WORDS AND THEIR COORDINATES IN TUPLES
@@ -54,10 +55,9 @@ def test_ocr(file_path):
     print("========================")
     print(metadata)
     
-
     
 
 if __name__ == "__main__":
-    test_ocr(MAY_ISSUE)
+    test_ocr(FEB_ISSUE)
     # Run the test function
     
